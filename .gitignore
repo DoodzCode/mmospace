@@ -142,3 +142,4 @@ vite.config.ts.timestamp-*
 # KoadOS Citadel
 .koad-os
 .koad-os/
+OUTPOST.md
