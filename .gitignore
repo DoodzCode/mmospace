@@ -143,3 +143,7 @@ vite.config.ts.timestamp-*
 .koad-os
 .koad-os/
 OUTPOST.md
+# Added by code-review-graph
+.code-review-graph/
+
+.claude
