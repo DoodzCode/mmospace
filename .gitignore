@@ -147,3 +147,9 @@ OUTPOST.md
 .code-review-graph/
 
 .claude
+
+# Build artifacts
+target/
+debug/
+**/debug/
+**/target/
