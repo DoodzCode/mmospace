@@ -1,0 +1,2 @@
+mod wire;
+fn main() {}
