@@ -7,8 +7,8 @@ This document tracks the high-level progress of the Space MUD project. Each spri
 
 | ID | Task | Status | Assigned |
 |:---|:---|:---:|:---|
-| `S1-WIRE-01` | `shared-wire-schema` | 🔄 Todo | — |
-| `S1-WIRE-02` | `shared-wire-ts-types` | 🔄 Todo | — |
+| `S1-WIRE-01` | `shared-wire-schema` | ✅ Done | — |
+| `S1-WIRE-02` | `shared-wire-ts-types` | 🚀 Active | — |
 | `S1-WIRE-03` | `shared-wire-rs-types` | 🔄 Todo | — |
 | `S1-INFRA-01` | `server-infra-scaffold` | 🔄 Todo | — |
 | `S1-INFRA-02` | `server-infra-postgres` | 🔄 Todo | — |
