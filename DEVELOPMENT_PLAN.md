@@ -24,7 +24,7 @@ Workstreams: `shared` · `server` · `client`
 - **Inputs/Outputs**: In: design decisions from proposal. Out: `wire-protocol.md` + optional JSON Schema files in a shared location (e.g. `spacemud-shared/` or a gist both repos pin).
 - **Estimated complexity**: M
 - **Acceptance criteria**:
-  1. All 7 server→client message types are documented with every field typed.
+  1. All 8 server→client message types are documented with every field typed.
   2. The single client→server `command` message is documented.
   3. Both devs have reviewed and signed off (git commit on shared repo/file).
   4. No implementation code exists that contradicts the schema.
