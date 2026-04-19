@@ -4,30 +4,34 @@
 `S1-WIRE-02` (shared-wire-ts-types)
 
 ## 🎯 Objective
-Create a TypeScript type definition file in the server repository that mirrors the `wire-protocol.md` schema. These types will ensure type safety for all WebSocket communication on the backend.
+TypeScript interfaces and discriminated unions for every wire message defined in `wire-protocol.md`. Lives in the shared package so it can be imported by any TypeScript consumer without duplication.
 
-## 📁 File Location
-`spacemud-server/src/types/wire.ts`
+## 📁 File Locations
+- `spacemud-shared/types/wire.ts` — canonical source of all wire types
+- `spacemud-shared/tsconfig.json` — validates shared types standalone under `tsc --strict`
+- `spacemud-server/src/types/wire.ts` — re-export barrel (`export * from "../../../spacemud-shared/types/wire"`)
 
-## 📋 Types to Implement
-Define a discriminated union `WireMessage` where the `type` field is the discriminator.
+## 📋 Types Implemented
 
-1.  **Interfaces/Types**:
-    - `WorldObject`: `{ id: string, type: string, x: number, y: number, z: number, properties: any }`
-    - `HyperLane`: `{ targetSystemId: string, distance: number }`
-    - `ModuleStatus`: `{ slot: number, type: string, active: boolean, power: number }`
-    - `MenuOption`: `{ label: string, action: string, cost?: number }`
+**Shared types:** `WorldObject`, `HyperLane`, `ModuleStatus`, `ObjectProperties`, `MenuOption`
 
-2.  **Message Interfaces**:
-    - `AuthMessage`, `CommandMessage` (Client -> Server)
-    - `AuthOkMessage`, `TickUpdateMessage`, `ShipStatusMessage`, `EventMessage`, `ScanResultMessage`, `DeepScanResultMessage`, `DockStateMessage` (Server -> Client)
+**Client → Server:** `AuthMessage`, `CommandMessage`, `ClientMessage`
+
+**Server → Client:** `AuthOkMessage`, `AuthErrMessage`, `TickUpdateMessage`, `ShipStatusMessage`, `EventMessage`, `ScanResultMessage`, `DeepScanResultMessage`, `DockStateMessage`, `ServerMessage`
+
+**Top-level union:** `WireMessage = ClientMessage | ServerMessage`
 
 ## ✅ Acceptance Criteria
-1.  File exists at `spacemud-server/src/types/wire.ts`.
-2.  The code exports a `WireMessage` union type.
-3.  All types from `S1-WIRE-01` are accurately represented.
-4.  The file passes `tsc --noEmit` validation (no syntax errors).
+1. `spacemud-shared/types/wire.ts` exists and exports `WireMessage`.
+2. `tsc --strict --noEmit` passes with zero errors on both shared and server packages.
+3. No `any` anywhere in the type definitions.
+4. Server imports types from the shared barrel without casting.
+5. All 8 server→client and 2 client→server message types from `wire-protocol.md` v0.1.0 are represented.
 
 ## 🧪 Verification
-1.  Compile with `bun build` or `tsc`.
-2.  Verify that a mock message object correctly triggers TypeScript errors if fields are missing or mistyped.
+- `bun /path/to/tsc -p spacemud-shared/tsconfig.json --noEmit` → clean
+- `bun /path/to/tsc -p spacemud-server/tsconfig.json --noEmit` → clean
+- `bun test` in `spacemud-server` runs `src/types/wire.test.ts` — all positive and `@ts-expect-error` negative tests pass.
+
+## 📌 Status
+✅ Complete — 2026-04-18
